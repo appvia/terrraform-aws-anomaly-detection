@@ -1,68 +1,28 @@
-#
-## Related to the provisioning of services 
-#
 
-locals {
-  # The SNS topic ARN to use for the cost anomaly detection
-  sns_topic_arn = var.create_sns_topic ? module.sns[0].topic_arn : data.aws_sns_topic.current[0].arn
-}
-
-#
-## We need to lookup the SNS topic ARN, if it exists
-#
-data "aws_sns_topic" "current" {
-  count = var.create_sns_topic ? 0 : 1
-  name  = var.sns_topic_name
-}
-
-# 
 ## Provision the SNS topic for the cost anomaly detection, if required
-#
-module "sns" {
-  source  = "terraform-aws-modules/sns/aws"
-  version = "v6.0.1"
-  count   = var.create_sns_topic ? 1 : 0
+module "notifications" {
+  source  = "appvia/notifications/aws"
+  version = "0.1.1"
 
-  name = var.sns_topic_name
-  tags = var.tags
-  topic_policy_statements = {
-    "AllowBudgetsToNotifySNSTopic" = {
-      actions = ["sns:Publish"]
-      effect  = "Allow"
-      principals = [{
-        type        = "Service"
-        identifiers = ["budgets.amazonaws.com"]
-      }]
-    }
-    "AllowLambda" = {
-      actions = [
-        "sns:Subscribe",
-      ]
-      effect = "Allow"
-      principals = [{
-        type        = "Service"
-        identifiers = ["lambda.amazonaws.com"]
-      }]
-    }
-  }
+  allowed_aws_services = ["budgets.amazonaws.com", "lambda.amazonaws.com"]
+  create_sns_topic     = var.create_sns_topic
+  email                = try(var.notifications.email.addresses, [])
+  slack                = local.slack
+  sns_topic_name       = var.sns_topic_name
+  tags                 = var.tags
 }
 
-#
 ## Provision the cost anomaly detection for services 
-#
 resource "aws_ce_anomaly_monitor" "this" {
   for_each = { for x in var.monitors : x.name => x }
 
   name              = each.value.name
   monitor_type      = each.value.monitor_type
   monitor_dimension = each.value.monitor_dimension
-  #monitor_specification = each.value.monitor_specification != "" ? jsonencode(each.value.monitor_specification) : ""
-  tags = var.tags
+  tags              = var.tags
 }
 
-#
 ## Provision the subscriptions to the anomaly detection monitors
-#
 resource "aws_ce_anomaly_subscription" "this" {
   for_each = { for x in var.monitors : x.name => x }
 
@@ -146,41 +106,7 @@ resource "aws_ce_anomaly_subscription" "this" {
   }
 
   subscriber {
-    address = local.sns_topic_arn
+    address = module.notifications.sns_topic_arn
     type    = "SNS"
   }
-
-  depends_on = [module.sns]
 }
-
-#
-## Provision any additional notification subscriptions (email) 
-#
-resource "aws_sns_topic_subscription" "main" {
-  for_each = { for x in var.notification.email.addresses : x => x }
-
-  endpoint  = each.value
-  protocol  = "email"
-  topic_arn = local.sns_topic_arn
-}
-
-
-#
-## Provision a slack notification if required
-#
-# tfsec:ignore:aws-lambda-enable-tracing
-# tfsec:ignore:aws-lambda-restrict-source-arn
-module "slack_notfications" {
-  count   = var.notification.slack != null ? 1 : 0
-  source  = "terraform-aws-modules/notify-slack/aws"
-  version = "6.1.1"
-
-  create_sns_topic     = false
-  lambda_function_name = "cost-anomaly-detection"
-  slack_channel        = var.notification.slack.channel
-  slack_username       = ":aws: (Cost Anomaly Detection)"
-  slack_webhook_url    = var.notification.slack.webhook_url
-  sns_topic_name       = var.sns_topic_name
-  tags                 = var.tags
-}
-
