@@ -41,6 +41,8 @@ variable "notifications" {
       # An optional secret name in the AWS Secrets Manager, containing this information 
       lambda_name = optional(string, "cost-anomaly-notification")
       # The name of the Lambda function to use for notifications 
+      username = optional(string, "AWS Cost Anomaly Detection")
+      # The username to use for notifications
       webhook_url = string
       # The URL of the Slack webhook to use for notifications
     }), null)

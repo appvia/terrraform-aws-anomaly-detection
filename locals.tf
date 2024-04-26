@@ -7,7 +7,7 @@ locals {
   slack = local.enable_slack ? {
     channel     = var.notifications.slack.channel
     secret_name = var.notifications.slack.secret_name
-    username    = ":aws: AWS Cost Anomaly Detection"
+    username    = var.notifications.slack.username
     webhook_url = var.notifications.slack.webhook_url
   } : null
 }
