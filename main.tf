@@ -2,7 +2,7 @@
 ## Provision the SNS topic for the cost anomaly detection, if required
 module "notifications" {
   source  = "appvia/notifications/aws"
-  version = "0.1.3"
+  version = "0.1.4"
 
   allowed_aws_services = ["budgets.amazonaws.com", "lambda.amazonaws.com"]
   create_sns_topic     = var.create_sns_topic
