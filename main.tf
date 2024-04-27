@@ -6,7 +6,7 @@ module "notifications" {
 
   allowed_aws_services = ["budgets.amazonaws.com", "lambda.amazonaws.com"]
   create_sns_topic     = var.create_sns_topic
-  email                = try(var.notifications.email.addresses, [])
+  email                = local.email
   slack                = local.slack
   sns_topic_name       = var.sns_topic_name
   tags                 = var.tags
