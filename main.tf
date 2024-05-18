@@ -1,11 +1,12 @@
 
 ## Provision the SNS topic for the cost anomaly detection, if required
 module "notifications" {
+  count   = var.enable_notification_creation ? 1 : 0
   source  = "appvia/notifications/aws"
   version = "0.1.4"
 
   allowed_aws_services = ["budgets.amazonaws.com", "lambda.amazonaws.com"]
-  create_sns_topic     = var.create_sns_topic
+  create_sns_topic     = local.enable_sns_topic_creation
   email                = local.email
   slack                = local.slack
   sns_topic_name       = var.sns_topic_name
@@ -106,7 +107,7 @@ resource "aws_ce_anomaly_subscription" "this" {
   }
 
   subscriber {
-    address = module.notifications.sns_topic_arn
+    address = local.sns_topic_arn
     type    = "SNS"
   }
 }

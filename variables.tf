@@ -1,6 +1,12 @@
 
-variable "create_sns_topic" {
-  description = "Indicates whether to create an SNS topic for notifications"
+variable "enable_sns_topic_creation" {
+  description = "Indicates whether to create an SNS topic within this module"
+  type        = bool
+  default     = true
+}
+
+variable "enable_notification_creation" {
+  description = "Indicates whether to create a notification lambda stack, default is true, but useful to toggle if using existing resources"
   type        = bool
   default     = true
 }
@@ -52,6 +58,12 @@ variable "sns_topic_name" {
   description = "The name of an existing or new SNS topic  for notifications"
   type        = string
   default     = "cost-anomaly-notifications"
+}
+
+variable "sns_topic_arn" {
+  description = "The ARN of an existing SNS topic for notifications"
+  type        = string
+  default     = null
 }
 
 variable "tags" {
