@@ -2,6 +2,7 @@
 variable "notification_secret_name" {
   description = "The name of the secret that contains the notification configuration"
   type        = string
+  default     = "cost-anomaly-notification"
 }
 
 variable "notification_email_addresses" {
@@ -13,5 +14,9 @@ variable "notification_email_addresses" {
 variable "tags" {
   description = "A map of tags to add to the resources"
   type        = map(string)
-  default     = {}
+  default = {
+    Environment = "Test"
+    Owner       = "Appvia"
+    GitRepo     = "https://github.com/appvia/terraform-aws-anomaly-detection"
+  }
 }

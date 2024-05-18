@@ -138,3 +138,7 @@ clean:
 		echo "--> Removing $$dir"; \
 		rm -rf $$dir; \
 	done
+	@find . -type d -name "builds" | while read -r dir; do \
+		echo "--> Removing $$dir"; \
+		rm -rf $$dir; \
+	done
