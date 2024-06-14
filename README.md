@@ -49,13 +49,13 @@ The `terraform-docs` utility is used to generate this README. Follow the below s
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.49.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.52.0 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_notifications"></a> [notifications](#module\_notifications) | appvia/notifications/aws | 0.1.4 |
+| <a name="module_notifications"></a> [notifications](#module\_notifications) | appvia/notifications/aws | 0.1.7 |
 
 ## Resources
 

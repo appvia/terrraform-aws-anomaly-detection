@@ -3,7 +3,7 @@
 module "notifications" {
   count   = var.enable_notification_creation ? 1 : 0
   source  = "appvia/notifications/aws"
-  version = "0.1.4"
+  version = "0.1.7"
 
   allowed_aws_services = ["budgets.amazonaws.com", "lambda.amazonaws.com"]
   create_sns_topic     = local.enable_sns_topic_creation
@@ -17,10 +17,11 @@ module "notifications" {
 resource "aws_ce_anomaly_monitor" "this" {
   for_each = { for x in var.monitors : x.name => x }
 
-  name              = each.value.name
-  monitor_type      = each.value.monitor_type
-  monitor_dimension = each.value.monitor_dimension
-  tags              = var.tags
+  name                  = each.value.name
+  monitor_type          = each.value.monitor_type
+  monitor_dimension     = each.value.monitor_dimension
+  monitor_specification = try(each.value.monitor_specification, null)
+  tags                  = var.tags
 }
 
 ## Provision the subscriptions to the anomaly detection monitors
