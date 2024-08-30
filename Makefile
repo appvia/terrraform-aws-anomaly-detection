@@ -52,6 +52,19 @@ documentation-examples:
 		find examples -type d -mindepth 1 -maxdepth 1 -exec terraform-docs markdown table --output-file README.md --output-mode inject {} \; ; \
 	fi
 
+upgrade-terraform-providers:
+	@printf "%s Upgrading Terraform providers for %-24s" "-->" "."
+	@terraform init -upgrade >/dev/null && echo "[OK]" || echo "[FAILED]"
+	@$(MAKE) upgrade-terraform-example-providers
+
+upgrade-terraform-example-providers:
+	@if [ -d examples ]; then \
+		find examples -type d -mindepth 1 -maxdepth 1 | while read -r dir; do \
+			printf "%s Upgrading Terraform providers for %-24s" "-->" "$$dir"; \
+			terraform -chdir=$$dir init -upgrade >/dev/null && echo "[OK]" || echo "[FAILED]"; \
+		done; \
+	fi
+
 init: 
 	@echo "--> Running terraform init"
 	@terraform init -backend=false

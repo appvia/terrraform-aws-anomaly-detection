@@ -18,7 +18,7 @@ variable "monitors" {
     # The name of the monitor 
     monitor_type = optional(string, "DIMENSIONAL")
     # The type of monitor to create 
-    monitor_dimension = optional(string, "SERVICE")
+    monitor_dimension = optional(string, "DIMENSIONAL")
     # The dimension to monitor
     monitor_specification = optional(string, null)
     # The specification to monitor 
