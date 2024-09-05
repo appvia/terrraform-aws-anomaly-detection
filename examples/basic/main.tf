@@ -14,6 +14,27 @@ locals {
         frequency = "IMMEDIATE"
         threshold_expression = [
           {
+            dimension = {
+              key           = "ANOMALY_TOTAL_IMPACT_ABSOLUTE"
+              match_options = ["GREATER_THAN_OR_EQUAL"]
+              values        = ["100"]
+            }
+          },
+          {
+            cost_category = {
+              key           = "Environment"
+              match_options = ["EQUALS"]
+              values        = ["Development"]
+            }
+          },
+          {
+            tags = {
+              key           = "Environment"
+              match_options = ["EQUALS"]
+              values        = ["Development"]
+            }
+          },
+          {
             and = {
               dimension = {
                 key           = "ANOMALY_TOTAL_IMPACT_ABSOLUTE"
@@ -38,14 +59,14 @@ locals {
 }
 
 ## Read the secret for aws secrets manager 
-data "aws_secretsmanager_secret" "notification" {
-  name = var.notification_secret_name
-}
+# data "aws_secretsmanager_secret" "notification" {
+#  name = var.notification_secret_name
+#}
 
 ## Retrieve the current version of the secret
-data "aws_secretsmanager_secret_version" "notification" {
-  secret_id = data.aws_secretsmanager_secret.notification.id
-}
+#data "aws_secretsmanager_secret_version" "notification" {
+#  secret_id = data.aws_secretsmanager_secret.notification.id
+#}
 
 module "cost_anomaly_detection" {
   source = "../../"
@@ -56,8 +77,8 @@ module "cost_anomaly_detection" {
       addresses = var.notification_email_addresses
     }
     slack = {
-      channel     = jsondecode(data.aws_secretsmanager_secret_version.notification.secret_string).channel
-      webhook_url = jsondecode(data.aws_secretsmanager_secret_version.notification.secret_string).webhook_url
+      channel     = "myfakechannel"
+      webhook_url = "https://hooks.slack.com/services/FAKE/URL"
     }
   }
   tags = var.tags
