@@ -49,7 +49,7 @@ The `terraform-docs` utility is used to generate this README. Follow the below s
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.65.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.0.0 |
 
 ## Modules
 
@@ -68,13 +68,13 @@ The `terraform-docs` utility is used to generate this README. Follow the below s
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_enable_notification_creation"></a> [enable\_notification\_creation](#input\_enable\_notification\_creation) | Indicates whether to create a notification lambda stack, default is true, but useful to toggle if using existing resources | `bool` | `true` | no |
-| <a name="input_enable_sns_topic_creation"></a> [enable\_sns\_topic\_creation](#input\_enable\_sns\_topic\_creation) | Indicates whether to create an SNS topic within this module | `bool` | `true` | no |
 | <a name="input_monitors"></a> [monitors](#input\_monitors) | A collection of cost anomaly monitors to create | <pre>list(object({<br>    name = string<br>    # The name of the monitor <br>    monitor_type = optional(string, "DIMENSIONAL")<br>    # The type of monitor to create <br>    monitor_dimension = optional(string, "DIMENSIONAL")<br>    # The dimension to monitor<br>    monitor_specification = optional(string, null)<br>    # The specification to monitor <br>    notify = optional(object({<br>      frequency = string<br>      # The frequency of notifications<br>      threshold_expression = optional(any, null)<br>      # The threshold expression to use for notifications<br>      }), {<br>      frequency = "DAILY"<br>    })<br>  }))</pre> | n/a | yes |
 | <a name="input_notifications"></a> [notifications](#input\_notifications) | The configuration of the notification | <pre>object({<br>    email = optional(object({<br>      addresses = list(string)<br>    }), null)<br>    slack = optional(object({<br>      channel = optional(string, null)<br>      # The channel name for notifications, required if secret_name is not provided<br>      secret_name = optional(string, null)<br>      # An optional secret name in the AWS Secrets Manager, containing this information <br>      lambda_name = optional(string, "cost-anomaly-notification")<br>      # The name of the Lambda function to use for notifications <br>      username = optional(string, "AWS Cost Anomaly Detection")<br>      # The username to use for notifications<br>      webhook_url = optional(string, null)<br>      # The URL of the Slack webhook to use for notifications, required if secret_name is not provided<br>    }), null)<br>  })</pre> | n/a | yes |
+| <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to add to all resources | `map(string)` | n/a | yes |
+| <a name="input_enable_notification_creation"></a> [enable\_notification\_creation](#input\_enable\_notification\_creation) | Indicates whether to create a notification lambda stack, default is true, but useful to toggle if using existing resources | `bool` | `true` | no |
+| <a name="input_enable_sns_topic_creation"></a> [enable\_sns\_topic\_creation](#input\_enable\_sns\_topic\_creation) | Indicates whether to create an SNS topic within this module | `bool` | `true` | no |
 | <a name="input_sns_topic_arn"></a> [sns\_topic\_arn](#input\_sns\_topic\_arn) | The ARN of an existing SNS topic for notifications | `string` | `null` | no |
 | <a name="input_sns_topic_name"></a> [sns\_topic\_name](#input\_sns\_topic\_name) | The name of an existing or new SNS topic  for notifications | `string` | `"cost-anomaly-notifications"` | no |
-| <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to add to all resources | `map(string)` | n/a | yes |
 
 ## Outputs
 

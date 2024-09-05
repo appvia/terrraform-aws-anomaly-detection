@@ -39,27 +39,27 @@ resource "aws_ce_anomaly_subscription" "this" {
       dynamic "dimension" {
         for_each = [for x in each.value.notify.threshold_expression : x if lookup(x, "dimension", null) != null]
         content {
-          key           = dimension.value.key
-          match_options = dimension.value.match_options
-          values        = dimension.value.values
+          key           = dimension.value.dimension.key
+          match_options = dimension.value.dimension.match_options
+          values        = dimension.value.dimension.values
         }
       }
 
       dynamic "cost_category" {
         for_each = [for x in each.value.notify.threshold_expression : x if lookup(x, "cost_category", null) != null]
         content {
-          key           = cost_category.value.key
-          match_options = cost_category.value.match_options
-          values        = cost_category.value.values
+          key           = cost_category.value.cost_category.key
+          match_options = cost_category.value.cost_category.match_options
+          values        = cost_category.value.cost_category.values
         }
       }
 
       dynamic "tags" {
         for_each = [for x in each.value.notify.threshold_expression : x if lookup(x, "tags", null) != null]
         content {
-          key           = tags.value.key
-          match_options = tags.value.match_options
-          values        = tags.value.values
+          key           = tags.value.tags.key
+          match_options = tags.value.tags.match_options
+          values        = tags.value.tags.values
         }
       }
 
