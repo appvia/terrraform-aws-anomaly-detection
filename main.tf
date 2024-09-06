@@ -5,7 +5,7 @@ module "notifications" {
   source  = "appvia/notifications/aws"
   version = "0.1.7"
 
-  allowed_aws_services = ["budgets.amazonaws.com", "lambda.amazonaws.com"]
+  allowed_aws_services = ["budgets.amazonaws.com", "costmonitors.amazonaws.com", "lambda.amazonaws.com"]
   create_sns_topic     = local.enable_sns_topic_creation
   email                = local.email
   slack                = local.slack
