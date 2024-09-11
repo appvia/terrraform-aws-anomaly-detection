@@ -13,7 +13,7 @@ module "notifications" {
   sns_topic_name       = var.sns_topic_name
   tags                 = var.tags
   accounts_id_to_name = {
-    "536471746696" = "mgmt"
+    "536471746696" = "root"
   }
 }
 
