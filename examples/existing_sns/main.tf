@@ -63,4 +63,8 @@ module "cost_anomaly_detection" {
       webhook_url = jsondecode(data.aws_secretsmanager_secret_version.notification.secret_string).webhook_url
     }
   }
+
+  accounts_id_to_name = {
+    "1234567890" = "mgmt"
+  }
 }

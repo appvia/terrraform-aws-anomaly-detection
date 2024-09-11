@@ -12,9 +12,7 @@ module "notifications" {
   slack                = local.slack
   sns_topic_name       = var.sns_topic_name
   tags                 = var.tags
-  accounts_id_to_name = {
-    "536471746696" = "root"
-  }
+  accounts_id_to_name  = var.accounts_id_to_name
 }
 
 ## Provision the cost anomaly detection for services 
