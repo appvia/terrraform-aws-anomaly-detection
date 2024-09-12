@@ -55,7 +55,7 @@ The `terraform-docs` utility is used to generate this README. Follow the below s
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_notifications"></a> [notifications](#module\_notifications) | appvia/notifications/aws | 1.0.2 |
+| <a name="module_notifications"></a> [notifications](#module\_notifications) | appvia/notifications/aws | 1.0.3 |
 
 ## Resources
 
