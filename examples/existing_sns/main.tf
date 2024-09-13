@@ -67,4 +67,6 @@ module "cost_anomaly_detection" {
   accounts_id_to_name = {
     "1234567890" = "mgmt"
   }
+  identity_center_start_url = null
+  identity_center_role      = null
 }

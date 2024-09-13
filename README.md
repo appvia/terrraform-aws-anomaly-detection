@@ -55,7 +55,7 @@ The `terraform-docs` utility is used to generate this README. Follow the below s
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_notifications"></a> [notifications](#module\_notifications) | appvia/notifications/aws | 1.0.3 |
+| <a name="module_notifications"></a> [notifications](#module\_notifications) | appvia/notifications/aws | 1.0.4 |
 
 ## Resources
 
@@ -74,6 +74,8 @@ The `terraform-docs` utility is used to generate this README. Follow the below s
 | <a name="input_accounts_id_to_name"></a> [accounts\_id\_to\_name](#input\_accounts\_id\_to\_name) | A mapping of account id and account name - used by notification lamdba to map an account ID to a human readable name | `map(string)` | `null` | no |
 | <a name="input_enable_notification_creation"></a> [enable\_notification\_creation](#input\_enable\_notification\_creation) | Indicates whether to create a notification lambda stack, default is true, but useful to toggle if using existing resources | `bool` | `true` | no |
 | <a name="input_enable_sns_topic_creation"></a> [enable\_sns\_topic\_creation](#input\_enable\_sns\_topic\_creation) | Indicates whether to create an SNS topic within this module | `bool` | `true` | no |
+| <a name="input_identity_center_role"></a> [identity\_center\_role](#input\_identity\_center\_role) | The name of the role to use when redirecting through Identity Center | `string` | `null` | no |
+| <a name="input_identity_center_start_url"></a> [identity\_center\_start\_url](#input\_identity\_center\_start\_url) | The start URL of your Identity Center instance | `string` | `null` | no |
 | <a name="input_sns_topic_arn"></a> [sns\_topic\_arn](#input\_sns\_topic\_arn) | The ARN of an existing SNS topic for notifications | `string` | `null` | no |
 | <a name="input_sns_topic_name"></a> [sns\_topic\_name](#input\_sns\_topic\_name) | The name of an existing or new SNS topic  for notifications | `string` | `"cost-anomaly-notifications"` | no |
 
