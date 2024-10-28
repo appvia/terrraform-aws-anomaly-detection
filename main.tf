@@ -3,7 +3,7 @@
 module "notifications" {
   count   = var.enable_notification_creation ? 1 : 0
   source  = "appvia/notifications/aws"
-  version = "1.0.5"
+  version = "1.0.6"
 
   allowed_aws_services      = ["budgets.amazonaws.com", "costalerts.amazonaws.com", "lambda.amazonaws.com"]
   create_sns_topic          = local.enable_sns_topic_creation
