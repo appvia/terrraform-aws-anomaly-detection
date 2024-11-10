@@ -3,3 +3,4 @@ AVD-DS-0013 # (Dockerfile) Use Workdir Over Cd (MEDIUM) - https://avd.aquasec.co
 AVD-DS-0015 # (Dockerfile) Use COPY instead of ADD (MEDIUM) - https://avd.aquasec.com/misconfig/dockerfile/general/avd-ds-0015/
 AVD-DS-0026 # (Dockerfile) Add HEALTHCHECK instruction in your Dockerfile (LOW) - https://avd.aquasec.com/misconfig/dockerfile/general/avd-ds-0013/
 AVD-AWS-0057 # https://avd.aquasec.com/misconfig/aws/iam/avd-aws-0057/
+AVD-AWS-0095 # https://avd.aquasec.com/misconfig/aws/sns/avd-aws-0095/
