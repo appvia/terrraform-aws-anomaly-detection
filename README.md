@@ -46,31 +46,11 @@ The `terraform-docs` utility is used to generate this README. Follow the below s
 3. Run `terraform-docs markdown table --output-file ${PWD}/README.md --output-mode inject .`
 
 <!-- BEGIN_TF_DOCS -->
-## Requirements
-
-| Name | Version |
-|------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.7 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.0.0 |
-
 ## Providers
 
 | Name | Version |
 |------|---------|
 | <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.0.0 |
-
-## Modules
-
-| Name | Source | Version |
-|------|--------|---------|
-| <a name="module_notifications"></a> [notifications](#module\_notifications) | appvia/notifications/aws | 1.0.5 |
-
-## Resources
-
-| Name | Type |
-|------|------|
-| [aws_ce_anomaly_monitor.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ce_anomaly_monitor) | resource |
-| [aws_ce_anomaly_subscription.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ce_anomaly_subscription) | resource |
 
 ## Inputs
 
