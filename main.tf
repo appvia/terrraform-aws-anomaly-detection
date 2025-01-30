@@ -12,7 +12,7 @@ module "notifications" {
   slack                     = local.slack
   sns_topic_name            = var.sns_topic_name
   tags                      = var.tags
-  accounts_id_to_name       = var.accounts_id_to_name
+  accounts_id_to_name_parameter_arn       = var.accounts_id_to_name_parameter_arn
   identity_center_start_url = var.identity_center_start_url
   identity_center_role      = var.identity_center_role
 }
