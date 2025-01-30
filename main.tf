@@ -3,18 +3,18 @@
 module "notifications" {
   count   = var.enable_notification_creation ? 1 : 0
   source  = "appvia/notifications/aws"
-  version = "1.1.0"
+  version = "2.0.0"
 
-  allowed_aws_services      = ["budgets.amazonaws.com", "costalerts.amazonaws.com", "lambda.amazonaws.com"]
-  create_sns_topic          = local.enable_sns_topic_creation
-  email                     = local.email
-  enable_slack              = local.enable_slack
-  slack                     = local.slack
-  sns_topic_name            = var.sns_topic_name
-  tags                      = var.tags
-  accounts_id_to_name       = var.accounts_id_to_name
-  identity_center_start_url = var.identity_center_start_url
-  identity_center_role      = var.identity_center_role
+  allowed_aws_services              = ["budgets.amazonaws.com", "costalerts.amazonaws.com", "lambda.amazonaws.com"]
+  create_sns_topic                  = local.enable_sns_topic_creation
+  email                             = local.email
+  enable_slack                      = local.enable_slack
+  slack                             = local.slack
+  sns_topic_name                    = var.sns_topic_name
+  tags                              = var.tags
+  accounts_id_to_name_parameter_arn = var.accounts_id_to_name_parameter_arn
+  identity_center_start_url         = var.identity_center_start_url
+  identity_center_role              = var.identity_center_role
 }
 
 ## Provision the cost anomaly detection for services 

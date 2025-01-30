@@ -81,10 +81,8 @@ module "cost_anomaly_detection" {
       webhook_url = "https://hooks.slack.com/services/FAKE/URL"
     }
   }
-  tags = var.tags
-  accounts_id_to_name = {
-    "1234567890" = "mgmt"
-  }
-  identity_center_start_url = null
-  identity_center_role      = null
+  tags                              = var.tags
+  accounts_id_to_name_parameter_arn = "arn:aws:ssm:eu-west-2:0123456778:parameter/myorg/configmaps/accounts_id_to_name_mapping"
+  identity_center_start_url         = null
+  identity_center_role              = null
 }
